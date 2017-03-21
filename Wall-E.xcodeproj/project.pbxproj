@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C0FDCE5E1E80F91C005FEA21 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FDCE5D1E80F91C005FEA21 /* main.cpp */; };
+		C0FDCE681E80F96D005FEA21 /* cCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FDCE671E80F96D005FEA21 /* cCube.cpp */; };
+		C0FDCE6C1E80F991005FEA21 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FDCE6A1E80F991005FEA21 /* GLUT.framework */; };
+		C0FDCE6D1E80F991005FEA21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FDCE6B1E80F991005FEA21 /* OpenGL.framework */; };
+		C0FDCE711E80FBAB005FEA21 /* cCylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FDCE701E80FBAB005FEA21 /* cCylinder.cpp */; };
+		C0FDCE771E81012E005FEA21 /* cWallE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FDCE761E81012E005FEA21 /* cWallE.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,15 @@
 /* Begin PBXFileReference section */
 		C0FDCE5A1E80F91C005FEA21 /* Wall-E */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Wall-E"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FDCE5D1E80F91C005FEA21 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C0FDCE661E80F94E005FEA21 /* cCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cCube.h; sourceTree = "<group>"; };
+		C0FDCE671E80F96D005FEA21 /* cCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cCube.cpp; sourceTree = "<group>"; };
+		C0FDCE6A1E80F991005FEA21 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		C0FDCE6B1E80F991005FEA21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		C0FDCE6E1E80FB9F005FEA21 /* cCylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cCylinder.h; sourceTree = "<group>"; };
+		C0FDCE6F1E80FB9F005FEA21 /* cylinderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cylinderData.h; sourceTree = "<group>"; };
+		C0FDCE701E80FBAB005FEA21 /* cCylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cCylinder.cpp; sourceTree = "<group>"; };
+		C0FDCE751E8100FD005FEA21 /* cWallE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cWallE.h; sourceTree = "<group>"; };
+		C0FDCE761E81012E005FEA21 /* cWallE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cWallE.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0FDCE6C1E80F991005FEA21 /* GLUT.framework in Frameworks */,
+				C0FDCE6D1E80F991005FEA21 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +57,10 @@
 		C0FDCE511E80F91C005FEA21 = {
 			isa = PBXGroup;
 			children = (
+				C0FDCE651E80F931005FEA21 /* header */,
 				C0FDCE5C1E80F91C005FEA21 /* Wall-E */,
 				C0FDCE5B1E80F91C005FEA21 /* Products */,
+				C0FDCE691E80F990005FEA21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +75,32 @@
 		C0FDCE5C1E80F91C005FEA21 /* Wall-E */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDCE701E80FBAB005FEA21 /* cCylinder.cpp */,
+				C0FDCE671E80F96D005FEA21 /* cCube.cpp */,
 				C0FDCE5D1E80F91C005FEA21 /* main.cpp */,
+				C0FDCE761E81012E005FEA21 /* cWallE.cpp */,
 			);
 			path = "Wall-E";
+			sourceTree = "<group>";
+		};
+		C0FDCE651E80F931005FEA21 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDCE6E1E80FB9F005FEA21 /* cCylinder.h */,
+				C0FDCE6F1E80FB9F005FEA21 /* cylinderData.h */,
+				C0FDCE661E80F94E005FEA21 /* cCube.h */,
+				C0FDCE751E8100FD005FEA21 /* cWallE.h */,
+			);
+			name = header;
+			sourceTree = "<group>";
+		};
+		C0FDCE691E80F990005FEA21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDCE6A1E80F991005FEA21 /* GLUT.framework */,
+				C0FDCE6B1E80F991005FEA21 /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0FDCE711E80FBAB005FEA21 /* cCylinder.cpp in Sources */,
+				C0FDCE681E80F96D005FEA21 /* cCube.cpp in Sources */,
 				C0FDCE5E1E80F91C005FEA21 /* main.cpp in Sources */,
+				C0FDCE771E81012E005FEA21 /* cWallE.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
