@@ -10,12 +10,14 @@
 #endif
 
 #include "cWallE.h"
+#include "cLuxo.h"
 #include <stdlib.h>
 
 int width, height;
 float deltaX, deltaY;
 
 WallE *walle;
+Luxo *luxo;
 
 GLfloat*	mat0_specular; //<---------------------------------------Material 0 - specular
 GLfloat*	mat0_diffuse; //<----------------------------------------Material 0 - diffuse
@@ -33,7 +35,8 @@ void display( void )
     glRotatef( deltaY, 1.0, 0.0, 0.0 );
     glRotatef( deltaX, 0.0, 1.0, 0.0 );
     
-    walle->draw();
+    //luxo -> draw();
+    //walle->draw();
     
     glutSwapBuffers();
 }
@@ -118,7 +121,7 @@ void keys( unsigned char key, int x, int y )
             glClearColor( 1.0, 0.0, 0.0, 1.0 );
             break;
         case 'b':case 'B':
-            glClearColor( 0.0, 0.0, 1.0, 1.0 );
+            glClearColor( 0.0, 0.3, 0.7, 1.0 );
             break;
         case '0':
             glClearColor( 0.0, 0.0, 0.0, 1.0 );

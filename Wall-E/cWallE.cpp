@@ -415,10 +415,7 @@ void WallE::draw(){
                 
             }
             glPopMatrix();
-            
-
-            
-            
+   
         }
         glPopMatrix();
     }
