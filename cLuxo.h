@@ -10,7 +10,7 @@
 #include "cCube.h"
 #include "cCylinder.h"
 
-#define NUM_CUBE 6
+#define NUM_CUBE 10
 #define NUM_CYLINDER 1
 
 class Luxo{
@@ -22,11 +22,14 @@ public:
     void update();
     
     static enum CUBES_L{
-        FIRSTLEG,SECONDLEG,THIRDLEG,NECK,NECK2,FACE
+        FIRSTLEG,SECONDLEG,THIRDLEG,NECK,NECK2,FACE,
+        SECONDLEG_AUX,SECONDLEG_AUX2,SECONDLEG_AUX3,
+        THIRDLEG_AUX,THIRDLEG_AUX2
     };
     
     Cube **cubs;
     Cylinder *cyl;
+    Cylinder *cyl2;
     
     float *mat_metal_diff;
     float *mat_metal_spec;
