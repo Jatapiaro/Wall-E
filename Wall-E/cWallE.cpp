@@ -20,15 +20,15 @@ WallE::WallE(){
     mat_orange_diff[3] = 1.0f;
     
     mat_orange_spec = new float[4];
-    mat_orange_spec[0] = 0.1f;
-    mat_orange_spec[1] = 0.1f;
-    mat_orange_spec[2] = 0.1f;
+    mat_orange_spec[0] = 0.0f;
+    mat_orange_spec[1] = 0.0f;
+    mat_orange_spec[2] = 0.0f;
     mat_orange_spec[3] = 1.0f;
     
     mat_orange_ambi = new float[4];
-    mat_orange_ambi[0] = 0.1f;
-    mat_orange_ambi[1] = 0.1f;
-    mat_orange_ambi[2] = 0.1f;
+    mat_orange_ambi[0] = 22.5f/255.0f;
+    mat_orange_ambi[1] = 15.0f/255.0f;
+    mat_orange_ambi[2] = 4.8f/255.0f;
     mat_orange_ambi[3] = 1.0f;
     
     mat_orange_shin = new float[1];
@@ -50,9 +50,9 @@ WallE::WallE(){
     mat_brown_ambi[2] = 0.027451f;
     mat_brown_ambi[3] = 1.0f;
     
-    mat_brown_spec[0] = 0.992157f;
-    mat_brown_spec[1] = 0.941176f;
-    mat_brown_spec[2] = 0.807843f;
+    mat_brown_spec[0] = 0.0f;
+    mat_brown_spec[1] = 0.0f;
+    mat_brown_spec[2] = 0.0f;
     mat_brown_spec[3] = 1.0f;
     
     mat_brown_shin[0] = 0.2179872;
@@ -63,21 +63,21 @@ WallE::WallE(){
     mat_metal_shin = new float[1];
 
     mat_metal_ambi[0] = 0.25f;
-    mat_metal_ambi[1] = 0.20725f;
-    mat_metal_ambi[2] = 0.20725f;
+    mat_metal_ambi[1] = 0.25f;
+    mat_metal_ambi[2] = 0.25f;
     mat_metal_ambi[3] = 1.0f;
     
-    mat_metal_diff[0] = 1.0f;
-    mat_metal_diff[1] = 0.829f;
-    mat_metal_diff[2] = 0.829f;
+    mat_metal_diff[0] = 0.4f;
+    mat_metal_diff[1] = 0.4f;
+    mat_metal_diff[2] = 0.4f;
     mat_metal_diff[3] = 1.0f;
     
-    mat_metal_spec[0] = 0.296648f;
-    mat_metal_spec[1] = 0.296648f;
-    mat_metal_spec[2] = 0.296648f;
+    mat_metal_spec[0] = 0.0f;
+    mat_metal_spec[1] = 0.0f;
+    mat_metal_spec[2] = 0.0f;
     mat_metal_spec[3] = 1.0f;
     
-    mat_metal_shin[0] = 0.88f;
+    mat_metal_shin[0] = 0.6f;
     
     mat_eyes_ambi = new float[4];
     mat_eyes_diff = new float[4];
@@ -94,9 +94,9 @@ WallE::WallE(){
     mat_eyes_diff[2] = 0.04136f;
     mat_eyes_diff[3] = 1.0f;
     
-    mat_eyes_spec[0] = 0.727811f;
-    mat_eyes_spec[1] = 0.626959f;
-    mat_eyes_spec[2] = 0.626959f;
+    mat_eyes_spec[0] = 0.0f;
+    mat_eyes_spec[1] = 0.0f;
+    mat_eyes_spec[2] = 0.0f;
     mat_eyes_spec[3] = 1.0f;
     
     mat_eyes_shin[0] = 0.6f;
@@ -124,8 +124,7 @@ void setMaterial(float *diff, float *spec, float *ambient, float *shin){
 }
 
 void WallE::draw(){
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+
     glPushMatrix(); //WALLE
     {
         glPushMatrix(); //Body
@@ -220,67 +219,75 @@ void WallE::draw(){
                 cyls[RSMALL3] -> draw();
             }
             glPopMatrix();
-                        
             
-            glPushMatrix(); //LARM
+            
+            glPushMatrix();
             {
-                glTranslated(-0.5, 0.25, 0.17);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScaled(1.2, 0.20, 0.12);
-                cubs[LARM] -> draw();
+                glPushMatrix(); //LARM
+                {
+                    glTranslated(-0.5, 0.25, 0.17);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScaled(1.2, 0.20, 0.12);
+                    cubs[LARM] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //LWRIST
+                {
+                    glTranslated(-1.0, 0.25, 0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    glRotated(90, 0, 0, 1);
+                    glScalef(.15, .25, .15);
+                    cyls[LWRIST] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //LHAND
+                {
+                    glTranslated(-1.35, 0.25, 0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    glRotated(90, 0, 0, 1);
+                    glScaled(0.4, 0.4, 0.1);
+                    cubs[LHAND] -> draw();
+                }
+                glPopMatrix();
+                
             }
             glPopMatrix();
             
-            glPushMatrix(); //LWRIST
+            glPushMatrix();
             {
-                glTranslated(-1.0, 0.25, 0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                glRotated(90, 0, 0, 1);
-                glScalef(.15, .25, .15);
-                cyls[LWRIST] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //LHAND
-            {
-                glTranslated(-1.35, 0.25, 0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                glRotated(90, 0, 0, 1);
-                glScaled(0.4, 0.4, 0.1);
-                cubs[LHAND] -> draw();
-            }
-            glPopMatrix();
-            
-            
-            
-            glPushMatrix(); //RARM
-            {
-                glTranslated(0.5, 0.25, 0.17);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScaled(1.2, 0.20, 0.12);
-                cubs[RARM] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //RWRIST
-            {
-                glTranslated(1.0, 0.25, 0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                glRotated(90, 0, 0, 1);
-                glScalef(.15, .25, .15);
-                cyls[LWRIST] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //RHAND
-            {
-                glTranslated(1.35, 0.25, 0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                glRotated(90, 0, 0, 1);
-                glScaled(0.4, 0.4, 0.1);
-                cubs[LHAND] -> draw();
+                
+                glPushMatrix(); //RARM
+                {
+                    glTranslated(0.5, 0.25, 0.17);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScaled(1.2, 0.20, 0.12);
+                    cubs[RARM] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //RWRIST
+                {
+                    glTranslated(1.0, 0.25, 0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    glRotated(90, 0, 0, 1);
+                    glScalef(.15, .25, .15);
+                    cyls[LWRIST] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //RHAND
+                {
+                    glTranslated(1.35, 0.25, 0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    glRotated(90, 0, 0, 1);
+                    glScaled(0.4, 0.4, 0.1);
+                    cubs[LHAND] -> draw();
+                }
+                glPopMatrix();
             }
             glPopMatrix();
             
@@ -295,113 +302,121 @@ void WallE::draw(){
             }
             glPopMatrix();
             
-            glPushMatrix(); //NECK1
+            glPushMatrix();
             {
-                glTranslated(0.0, 0.70, 0.0);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScalef(0.2, 0.25, 0.2);
-                cyls[NECK1] -> draw();
+                glRotated(-75, 0, 1, 0);
+                glPushMatrix(); //NECK1
+                {
+                    glRotated(45, 0, 1, 0);
+                    glTranslated(0.0, 0.70, 0.0);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScalef(0.2, 0.25, 0.2);
+                    cyls[NECK1] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //NECK2
+                {
+                    glTranslated(0.0, 0.95, 0.0);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    glRotated(-90, 0, 0, 1);
+                    glScalef(0.15, 0.1, 0.15);
+                    cyls[NECK2] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //NECK3
+                {
+                    glTranslated(0.0, 1.1, 0.0);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScalef(0.2, 0.15, 0.2);
+                    cyls[NECK3] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //NOSE
+                {
+                    glTranslated(0.0, 1.3, 0.0);
+                    //setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(90, 90, 0, 1);
+                    glScalef(0.2, 0.1, 0.2);
+                    cyls[NOSE] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //LFACE_CYL
+                {
+                    glTranslated(-0.25, 1.275, -0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(90, 90, 0, 1);
+                    glScalef(0.40, 0.35, 0.40);
+                    cyls[LFACE_CYL] -> draw();
+                }
+                glPopMatrix();
+                
+                
+                glPushMatrix(); //LFACE_CUBE
+                {
+                    glTranslated(-0.22, 1.3, -0.15);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScalef(0.35, 0.35, 0.5);
+                    cubs[LFACE_CUBE] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //LEYE
+                {
+                    glTranslated(-0.20, 1.3, -0.045);
+                    setMaterial(mat_eyes_shin, mat_eyes_diff, mat_eyes_ambi, mat_eyes_shin);
+                    glRotated(90, 90, 0, 1);
+                    glScalef(0.25, 0.20, 0.25);
+                    cyls[LEYE] -> draw();
+                }
+                glPopMatrix();
+                
+                
+                
+                glPushMatrix(); //LFACE_CYL
+                {
+                    glTranslated(0.25, 1.275, -0.17);
+                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(90, 90, 0, 1);
+                    glScalef(0.40, 0.35, 0.40);
+                    cyls[LFACE_CYL] -> draw();
+                }
+                glPopMatrix();
+                
+                
+                glPushMatrix(); //LFACE_CUBE
+                {
+                    glTranslated(0.22, 1.3, -0.15);
+                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                    glRotated(0, 0, 0, 1);
+                    glScalef(0.35, 0.35, 0.5);
+                    cubs[LFACE_CUBE] -> draw();
+                }
+                glPopMatrix();
+                
+                glPushMatrix(); //LEYE
+                {
+                    glTranslated(0.20, 1.3, -0.045);
+                    setMaterial(mat_eyes_shin, mat_eyes_diff, mat_eyes_ambi, mat_eyes_shin);
+                    glRotated(90, 90, 0, 1);
+                    glScalef(0.25, 0.20, 0.25);
+                    cyls[LEYE] -> draw();
+                }
+                glPopMatrix();
+                
             }
             glPopMatrix();
             
-            glPushMatrix(); //NECK2
-            {
-                glTranslated(0.0, 0.95, 0.0);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                glRotated(-90, 0, 0, 1);
-                glScalef(0.15, 0.1, 0.15);
-                cyls[NECK2] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //NECK3
-            {
-                glTranslated(0.0, 1.1, 0.0);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScalef(0.2, 0.15, 0.2);
-                cyls[NECK3] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //NOSE
-            {
-                glTranslated(0.0, 1.3, 0.0);
-                //setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(90, 90, 0, 1);
-                glScalef(0.2, 0.1, 0.2);
-                cyls[NOSE] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //LFACE_CYL
-            {
-                glTranslated(-0.25, 1.275, -0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(90, 90, 0, 1);
-                glScalef(0.40, 0.35, 0.40);
-                cyls[LFACE_CYL] -> draw();
-            }
-            glPopMatrix();
-            
-            
-            glPushMatrix(); //LFACE_CUBE
-            {
-                glTranslated(-0.22, 1.3, -0.15);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScalef(0.35, 0.35, 0.5);
-                cubs[LFACE_CUBE] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //LEYE
-            {
-                glTranslated(-0.20, 1.3, -0.045);
-                setMaterial(mat_eyes_shin, mat_eyes_diff, mat_eyes_ambi, mat_eyes_shin);
-                glRotated(90, 90, 0, 1);
-                glScalef(0.25, 0.20, 0.25);
-                cyls[LEYE] -> draw();
-            }
-            glPopMatrix();
-            
-            
-            
-            glPushMatrix(); //LFACE_CYL
-            {
-                glTranslated(0.25, 1.275, -0.17);
-                setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
-                //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(90, 90, 0, 1);
-                glScalef(0.40, 0.35, 0.40);
-                cyls[LFACE_CYL] -> draw();
-            }
-            glPopMatrix();
-            
-            
-            glPushMatrix(); //LFACE_CUBE
-            {
-                glTranslated(0.22, 1.3, -0.15);
-                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
-                glScalef(0.35, 0.35, 0.5);
-                cubs[LFACE_CUBE] -> draw();
-            }
-            glPopMatrix();
-            
-            glPushMatrix(); //LEYE
-            {
-                glTranslated(0.20, 1.3, -0.045);
-                setMaterial(mat_eyes_shin, mat_eyes_diff, mat_eyes_ambi, mat_eyes_shin);
-                glRotated(90, 90, 0, 1);
-                glScalef(0.25, 0.20, 0.25);
-                cyls[LEYE] -> draw();
-            }
-            glPopMatrix();
-        
+
             
             
         }

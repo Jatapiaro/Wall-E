@@ -76,6 +76,42 @@ Cube::Cube()
 	colors[7][1] = 1.0;
 	colors[7][2] = 1.0;
 
+    
+    // vertex 1
+    normals[0][0] = -1.0;
+    normals[0][1] = -1.0;
+    normals[0][2] = -1.0;
+    // vertex 2
+    normals[1][0] = 1.0;
+    normals[1][1] = -1.0;
+    normals[1][2] = -1.0;
+    // vertex 3
+    normals[2][0] = 1.0;
+    normals[2][1] = 1.0;
+    normals[2][2] = -1.0;
+    // vertex 4
+    normals[3][0] = -1.0;
+    normals[3][1] = 1.0;
+    normals[3][2] = -1.0;
+    // vertex 5
+    normals[4][0] = -1.0;
+    normals[4][1] = -1.0;
+    normals[4][2] = 1.0;
+    // vertex 6
+    normals[5][0] = 1.0;
+    normals[5][1] = -1.0;
+    normals[5][2] = 1.0;
+    //vertex 7
+    normals[6][0] = 1.0;
+    normals[6][1] = 1.0;
+    normals[6][2] = 1.0;
+    // vertex 8
+    normals[7][0] = -1.0;
+    normals[7][1] = 1.0;
+    normals[7][2] = 1.0;
+    
+    
+    
 	// The indices will tell OpenGL how to connect the vertices
 	unsigned char indicesCube[24] = {	0,3,2,1,
 										2,3,7,6,
