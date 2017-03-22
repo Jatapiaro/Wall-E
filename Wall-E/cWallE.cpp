@@ -236,7 +236,7 @@ void WallE::draw(){
                 glPushMatrix(); //LWRIST
                 {
                     glTranslated(-1.0, 0.25, 0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScalef(.15, .25, .15);
                     cyls[LWRIST] -> draw();
@@ -246,7 +246,7 @@ void WallE::draw(){
                 glPushMatrix(); //LHAND
                 {
                     glTranslated(-1.35, 0.25, 0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScaled(0.4, 0.4, 0.1);
                     cubs[LHAND] -> draw();
@@ -272,7 +272,7 @@ void WallE::draw(){
                 glPushMatrix(); //RWRIST
                 {
                     glTranslated(1.0, 0.25, 0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScalef(.15, .25, .15);
                     cyls[LWRIST] -> draw();
@@ -282,7 +282,7 @@ void WallE::draw(){
                 glPushMatrix(); //RHAND
                 {
                     glTranslated(1.35, 0.25, 0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScaled(0.4, 0.4, 0.1);
                     cubs[LHAND] -> draw();
@@ -319,7 +319,7 @@ void WallE::draw(){
                 glPushMatrix(); //NECK2
                 {
                     glTranslated(0.0, 0.95, 0.0);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(-90, 0, 0, 1);
                     glScalef(0.15, 0.1, 0.15);
                     cyls[NECK2] -> draw();
@@ -339,7 +339,7 @@ void WallE::draw(){
                 glPushMatrix(); //NOSE
                 {
                     glTranslated(0.0, 1.3, 0.0);
-                    //setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    //setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
                     glRotated(90, 90, 0, 1);
                     glScalef(0.2, 0.1, 0.2);
@@ -350,7 +350,7 @@ void WallE::draw(){
                 glPushMatrix(); //LFACE_CYL
                 {
                     glTranslated(-0.25, 1.275, -0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
                     glRotated(90, 90, 0, 1);
                     glScalef(0.40, 0.35, 0.40);
@@ -384,7 +384,7 @@ void WallE::draw(){
                 glPushMatrix(); //LFACE_CYL
                 {
                     glTranslated(0.25, 1.275, -0.17);
-                    setMaterial(mat_metal_shin, mat_metal_diff, mat_metal_ambi, mat_metal_shin);
+                    setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     //bsetMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
                     glRotated(90, 90, 0, 1);
                     glScalef(0.40, 0.35, 0.40);

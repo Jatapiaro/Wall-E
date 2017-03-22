@@ -10,8 +10,8 @@
 #include "cCube.h"
 #include "cCylinder.h"
 
-#define NUM_CUBES 6
-#define NUM_CYLINDERS 1
+#define NUM_CUBE 6
+#define NUM_CYLINDER 1
 
 class Luxo{
 public:
@@ -21,7 +21,7 @@ public:
     void draw();
     void update();
     
-    static enum CUBES_E{
+    static enum CUBES_L{
         FIRSTLEG,SECONDLEG,THIRDLEG,NECK,NECK2,FACE
     };
     

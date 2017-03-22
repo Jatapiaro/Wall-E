@@ -35,7 +35,7 @@ void display( void )
     glRotatef( deltaY, 1.0, 0.0, 0.0 );
     glRotatef( deltaX, 0.0, 1.0, 0.0 );
     
-    //luxo -> draw();
+    luxo -> draw();
     //walle->draw();
     
     glutSwapBuffers();
@@ -97,6 +97,7 @@ void init( void )
     float pos[] = { 0.0, 0.0, 0.0 };
     float size[] = { 1, 1, 1 };
     walle = new WallE();
+    luxo = new Luxo();
 }
 
 void reshape( int w, int h )
