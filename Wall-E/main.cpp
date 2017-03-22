@@ -43,12 +43,13 @@ void display( void )
 
 void idle( void )
 {
+    luxo -> update();
     glutPostRedisplay();
 }
 
 void init( void )
 {
-    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f ); //<---------------------Clear color
+    glClearColor( 0.0, 0.3, 0.7, 1.0 ); //<---------------------Clear color
     glShadeModel ( GL_SMOOTH ); //<----------------------------------Smooth shading
     
     glEnable(GL_NORMALIZE);

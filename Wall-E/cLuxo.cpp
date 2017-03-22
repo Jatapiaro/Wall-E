@@ -27,6 +27,9 @@ Luxo::Luxo()
     mat_metal_spec[2] = 0.0f;
     mat_metal_spec[3] = 1.0f;
     mat_metal_shin[0] = 0.6f;
+    posX = -3;
+    jump = flip =  false;
+    jumpY = 0;
 }
 
 Luxo::~Luxo(){
@@ -41,13 +44,43 @@ void setMaterial2(float *diff, float *spec, float *ambient, float *shin){
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shin);
 }
 
+void Luxo::update()
+{
+    if(jump){
+        jumpY+=0.03;
+    }else{
+        jumpY-=0.03;
+    }
+    
+    if(jumpY>=1){
+        jump = false;
+    }else if(jumpY<=0){
+        jump = true;
+    }
+    
+    if(posX >= 1){
+        flip = true;
+    }else{
+        posX+=0.01f;
+    }
+}
+
 void Luxo::draw()
 {
+    
+    if(flip){
+        glRotated(0, 0, 1, 0);
+        glTranslatef(-2,0,-1);
+    }else{
+        glRotated(180,0, 1, 0);
+        glTranslatef(posX,jumpY, 0);
+    }
+    
     glPushMatrix();
     {
         glPushMatrix();
         {
-            glTranslated(0,-2,-1);
+            glTranslated(0,-2,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(0, 0, 0, 1);
             glScaled(1, 0.1, 1);
@@ -57,7 +90,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(0,-1.85,-1);
+            glTranslated(0,-1.85,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(90, 0, 0, 1);
             glScaled(0.2, 0.10, 0.12);
@@ -67,7 +100,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(-0.13,-1.60,-1);
+            glTranslated(-0.13,-1.60,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(-51, 0, 0, 1);
             glScaled(0.5, 0.05, 0.12);
@@ -77,7 +110,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(0.05,-1.7,-1);
+            glTranslated(0.05,-1.7,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(40, 0, 0, 1);
             glScaled(0.15, 0.05, 0.12);
@@ -87,7 +120,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(0,-1.50,-1);
+            glTranslated(0,-1.50,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(120, 0, 0, 1);
             glScaled(0.37, 0.05, 0.12);
@@ -97,7 +130,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(-0.16,-1.35,-1);
+            glTranslated(-0.16,-1.35,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(30, 0, 0, 1);
             glScaled(0.2, 0.05, 0.12);
@@ -107,7 +140,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(-0.14,-1.08,-1);
+            glTranslated(-0.14,-1.08,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(70, 0, 0, 1);
             glScaled(0.8, 0.05, 0.12);
@@ -117,7 +150,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(0.0,-1.08,-1);
+            glTranslated(0.0,-1.08,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(70, 0, 0, 1);
             glScaled(0.5, 0.05, 0.12);
@@ -127,7 +160,7 @@ void Luxo::draw()
         
         glPushMatrix();
         {
-            glTranslated(0.05,-0.75,-1);
+            glTranslated(0.05,-0.75,1);
             setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
             glRotated(-65, 0, 0, 1);
             glScaled(0.20, 0.05, 0.12);
@@ -135,12 +168,14 @@ void Luxo::draw()
         }
         glPopMatrix();
         
-        
         glPushMatrix(); //Neck
         {
+            if(flip){
+                glRotated(-45, 0, 0,1);
+            }
             glPushMatrix();
             {
-                glTranslated(0.0,-0.60,-1);
+                glTranslated(0.0,-0.60,1);
                 setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                 glRotated(90, 0, 0, 1);
                 glScaled(0.3, 0.05, 0.12);
@@ -150,7 +185,7 @@ void Luxo::draw()
             
             glPushMatrix();
             {
-                glTranslated(-0.05,-0.30,-1);
+                glTranslated(-0.05,-0.30,1);
                 setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                 glRotated(0, 0, 0, 1);
                 glScaled(0.3, 0.3, 0.3);
@@ -160,7 +195,7 @@ void Luxo::draw()
             
             glPushMatrix();
             {
-                glTranslated(0.2,-0.30,-1);
+                glTranslated(0.2,-0.30,1);
                 setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                 glRotated(0, 0, 0, 1);
                 glScaled(0.5, 0.5, 0.5);
@@ -170,7 +205,7 @@ void Luxo::draw()
             
             glPushMatrix();
             {
-                glTranslated(0.5,-0.30,-1);
+                glTranslated(0.5,-0.30,1);
                 setMaterial2(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                 glRotated(90, 0, 0, 1);
                 glScaled(0.6, 0.1, 0.6);
@@ -180,7 +215,6 @@ void Luxo::draw()
             
         }
         glPopMatrix();
-        
     }
     glPopMatrix();
 }

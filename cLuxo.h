@@ -36,4 +36,8 @@ public:
     float *mat_metal_ambi;
     float *mat_metal_shin;
     
+    float posX;
+    
+    float jumpY;
+    bool jump,flip;
 };
