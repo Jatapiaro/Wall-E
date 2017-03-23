@@ -58,10 +58,11 @@ void Luxo::update()
         jump = true;
     }
     
-    if(posX >= 1){
+    if(posX >= 2){
         flip = true;
+        //printf("%f\n",posX);
     }else{
-        posX+=0.01f;
+        posX+=0.05f;
     }
 }
 
@@ -69,8 +70,8 @@ void Luxo::draw()
 {
     
     if(flip){
-        glRotated(0, 0, 1, 0);
-        glTranslatef(-2,0,-1);
+        glRotated(0, 0, 0, 1);
+        glTranslatef(-posX,0.5,-1);
     }else{
         glRotated(180,0, 1, 0);
         glTranslatef(posX,jumpY, 0);
@@ -170,9 +171,6 @@ void Luxo::draw()
         
         glPushMatrix(); //Neck
         {
-            if(flip){
-                glRotated(-45, 0, 0,1);
-            }
             glPushMatrix();
             {
                 glTranslated(0.0,-0.60,1);

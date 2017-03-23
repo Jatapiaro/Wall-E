@@ -26,17 +26,26 @@ GLfloat*	light0_position; //<-------------------------------------Light 0    - l
 
 void display( void )
 {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);				// Clear color and depth buffers.
+    glLoadIdentity();												// Reset 3D view matrix.
+    gluLookAt(0.0, -2.0, 10.0,	// Where the cam is									// Where the camera is.
+              0.0, 0.0, 0.0,	// Cam pivot									// To where the camera points at.
+              0.0, 1.0, 0.0); // UP vector
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     // State machine: set active material:
     glMaterialfv( GL_FRONT,	 GL_DIFFUSE,   mat0_diffuse		);
     glMaterialfv( GL_FRONT,  GL_SPECULAR,  mat0_specular	);
     glMaterialfv( GL_FRONT,  GL_SHININESS, mat0_shininess	);
-    glLoadIdentity();
     glRotatef( deltaY, 1.0, 0.0, 0.0 );
     glRotatef( deltaX, 0.0, 1.0, 0.0 );
     
+    
+    
     luxo -> draw();
-    //walle->draw();
+    if(luxo->flip){
+        walle->draw();
+    }
+    
     
     glutSwapBuffers();
 }
@@ -101,18 +110,17 @@ void init( void )
     luxo = new Luxo();
 }
 
-void reshape( int w, int h )
+void reshape( int x, int y )
 {
-    width = w;
-    height = h;
-    glViewport( 0, 0, w, h );
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity();
-    
-    gluPerspective( 45, w / h * 1.0, 0.01, 20 );
-    glTranslatef( 0, 0, -8 );
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);									// Go to 2D mode.
+    glLoadIdentity();												// Reset the 2D matrix.
+    gluPerspective(40.0, (GLdouble)x / (GLdouble)y, 0.5, 20.0);		// Configure the camera lens aperture.
+    glMatrixMode(GL_MODELVIEW);										// Go to 3D mode.
+    glViewport(0, 0, x, y);											// Configure the camera frame dimensions.
+    gluLookAt(2.0, 1.0, 3.0,
+              0.0, 0.0, 0.0,
+              0.0, 1.0, 0.0);
+    display();
 }
 
 void keys( unsigned char key, int x, int y )
