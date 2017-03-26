@@ -131,7 +131,7 @@ void WallE::draw(){
         glPushMatrix(); //Body
         {
             glScaled(1.0f, 0.8f, 1.0f);
-            glRotated(-90, 0, 1, 0);
+            //glRotated(-90, 0, 1, 0);
             setMaterial(mat_orange_diff,
                         mat_orange_spec, mat_orange_ambi, mat_orange_shin);
             cubs[BODY] -> draw();
@@ -260,7 +260,6 @@ void WallE::draw(){
             
             glPushMatrix();
             {
-                
                 glPushMatrix(); //RARM
                 {
                     glTranslated(0.5, 0.25, 0.17);
@@ -290,23 +289,23 @@ void WallE::draw(){
                     cubs[LHAND] -> draw();
                 }
                 glPopMatrix();
-                
-                glPushMatrix(); //DOOR
-                {
-                    glTranslated(0, -0.25, 0.55);
-                    setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                    glRotated(0, 0, 0, 1);
-                    glScaled(1.0f, 0.5, 0.1f);
-                    cubs[DOOR] -> draw();
-                }
-                glPopMatrix();
+            }
+            glPopMatrix();
+            
+            glPushMatrix(); //DOOR
+            {
+                glTranslated(0, -0.25, 0.55);
+                setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
+                glRotated(0, 0, 0, 1);
+                glScaled(1.0f, 0.5, 0.1f);
+                cubs[DOOR] -> draw();
             }
             glPopMatrix();
             
             
             glPushMatrix();
             {
-                glRotated(0, 0, 1, 0);
+                //glRotated(0, 0, 1, 0);
                 glPushMatrix(); //NECK1
                 {
                     glRotated(45, 0, 1, 0);

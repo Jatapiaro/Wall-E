@@ -103,7 +103,7 @@ void init( void )
     glEnable( GL_DEPTH_TEST );
     // Assign initial rotation angle:
     glShadeModel(GL_FLAT);
-    glClearColor( 0.0, 0.0, 0.0, 1.0 );
+    glClearColor( 0.0, 0.3, 0.7, 1.0 );
     float pos[] = { 0.0, 0.0, 0.0 };
     float size[] = { 1, 1, 1 };
     walle = new WallE();
