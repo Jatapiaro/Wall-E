@@ -28,6 +28,7 @@ Luxo::Luxo()
     mat_metal_spec[3] = 1.0f;
     mat_metal_shin[0] = 0.6f;
     posX = -3;
+    
     jump = flip =  false;
     jumpY = 0;
 }
@@ -58,7 +59,7 @@ void Luxo::update()
         jump = true;
     }
     
-    if(posX >= 2){
+    if(posX >= 3){
         flip = true;
         //printf("%f\n",posX);
     }else{

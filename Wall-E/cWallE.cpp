@@ -101,6 +101,22 @@ WallE::WallE(){
     
     mat_eyes_shin[0] = 0.6f;
     
+    lx = -0.5;
+    ly = 0.25;
+    lz = 0.17;
+    
+    frames = 0;
+    brazoAngle = brazoAngle2 = 20.0f;
+    pos = 1.3f;
+    pos2 = 4.2f;
+    
+    hide = 0.70;
+    appear = false;
+    cabezaLoca = false;
+    
+    cabezAngle = doorAng = 0.0f;
+    cabezaFlag = 0;
+    bodyAngle = 90;
 }
 
 
@@ -114,6 +130,57 @@ void WallE::update(){
     /*
      Anim
      */
+    if(appear && pos<4.2 && cabezaFlag<5){
+        pos+=0.01f;
+    }else if(appear && pos>4.2 && cabezaFlag<5){
+        cabezaLoca = true;
+    }
+    
+    if(cabezaLoca){
+        if(cabezaFlag == 0 || cabezaFlag == 2){
+            cabezAngle-=3;
+            if(cabezAngle<=-120){
+                if(cabezaFlag == 0){
+                    cabezaFlag = 1;
+                }else{
+                    cabezaFlag = 3;
+                }
+            }
+        }else if(cabezaFlag == 1){
+            cabezAngle+=3;
+            if(cabezAngle>=-90){
+                cabezaFlag = 2;
+            }
+        }
+    }
+    
+    if(cabezaFlag == 3){
+        if(bodyAngle>=50){
+            bodyAngle-=1;
+        }else{
+            cabezaFlag = 4;
+        }
+    }
+    if(cabezaFlag == 4){
+        if(bodyAngle<=90){
+            bodyAngle+=1;
+        }
+        if(cabezAngle<=-90){
+            cabezAngle+=1;
+        }else{
+            cabezaFlag = 5;
+        }
+    }
+    
+    if(cabezaFlag == 5){
+        if(hide>=-0.3){
+            hide -= 0.01f;
+        }else{
+            cabezaFlag = 6;
+        }
+        pos2-=0.003f;
+    }
+    
 }
 
 void setMaterial(float *diff, float *spec, float *ambient, float *shin){
@@ -124,8 +191,19 @@ void setMaterial(float *diff, float *spec, float *ambient, float *shin){
 }
 
 void WallE::draw(){
+    
 
-    glTranslatef(2, -0.0, 1);
+    if(cabezaFlag<5){
+        glTranslatef(pos, -1.5, 1);
+    }else{
+        glTranslatef(pos2, -1.5, 1);
+    }
+    glRotated(bodyAngle, 0, 1, 0);
+    /*if(cabezaFlag == 3){
+        
+    }else{
+        glRotated(90, 0, 1, 0);
+    }*/
     glPushMatrix(); //WALLE
     {
         glPushMatrix(); //Body
@@ -222,14 +300,24 @@ void WallE::draw(){
             }
             glPopMatrix();
             
-            
+
             glPushMatrix();
             {
+                if(cabezaFlag!=5){
+                    glRotated(brazoAngle, 1, 0, 0);
+                }else{
+                    if(brazoAngle>-30){
+                        brazoAngle-=0.5;
+                    }
+                    glRotated(brazoAngle, 1, 0, 0);
+                }
                 glPushMatrix(); //LARM
                 {
-                    glTranslated(-0.5, 0.25, 0.17);
+                    glTranslatef(lx, ly, lz);
+                    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(lx, -ly, -lz+0.1);
                     setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                    glRotated(0, 0, 0, 1);
+                    //glRotated(0, 0, 0, 1);
                     glScaled(1.2, 0.20, 0.12);
                     cubs[LARM] -> draw();
                 }
@@ -237,7 +325,10 @@ void WallE::draw(){
                 
                 glPushMatrix(); //LWRIST
                 {
-                    glTranslated(-1.0, 0.25, 0.17);
+                    glTranslatef(-1, 0.25f, 0.17);
+                    glRotated(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(-1, -0.25, -0.17+0.6);
+                    //glTranslated(-1.0, 0.25, 0.17);
                     setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScalef(.15, .25, .15);
@@ -247,7 +338,10 @@ void WallE::draw(){
                 
                 glPushMatrix(); //LHAND
                 {
-                    glTranslated(-1.35, 0.25, 0.17);
+                    glTranslatef(-1.35, 0.25, 0.17);
+                    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(-1.35, -0.25, -0.17+0.95);
+                    //glTranslated(-1.35, 0.25, 0.17);
                     setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScaled(0.4, 0.4, 0.1);
@@ -260,9 +354,19 @@ void WallE::draw(){
             
             glPushMatrix();
             {
+                if(cabezaFlag<5){
+                    glRotated(brazoAngle, 1, 0, 0);
+                }else{
+                    if(brazoAngle2>-20){
+                        brazoAngle2-=0.5;
+                    }
+                    glRotated(brazoAngle2, 1, 0, 0);
+                }
                 glPushMatrix(); //RARM
                 {
-                    glTranslated(0.5, 0.25, 0.17);
+                    glTranslatef(0.5, 0.25, 0.17);
+                    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(-0.5, -0.25, 0.17-0.1);
                     setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
                     glRotated(0, 0, 0, 1);
                     glScaled(1.2, 0.20, 0.12);
@@ -272,7 +376,9 @@ void WallE::draw(){
                 
                 glPushMatrix(); //RWRIST
                 {
-                    glTranslated(1.0, 0.25, 0.17);
+                    glTranslatef(1.0, 0.25, 0.17);
+                    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(-1, -0.25, 0.17-0.6);
                     setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScalef(.15, .25, .15);
@@ -282,7 +388,9 @@ void WallE::draw(){
                 
                 glPushMatrix(); //RHAND
                 {
-                    glTranslated(1.35, 0.25, 0.17);
+                    glTranslatef(1.35, 0.25, 0.17);
+                    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    glTranslatef(-1.35, -0.25, 0.17-0.95);
                     setMaterial(mat_metal_diff, mat_metal_spec, mat_metal_ambi, mat_metal_shin);
                     glRotated(90, 0, 0, 1);
                     glScaled(0.4, 0.4, 0.1);
@@ -296,7 +404,14 @@ void WallE::draw(){
             {
                 glTranslated(0, -0.25, 0.55);
                 setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
-                glRotated(0, 0, 0, 1);
+                if(cabezaFlag<5){
+                    glRotated(0, 0, 0, 1);
+                }else{
+                    glRotatef(doorAng, 1, 0, 0);
+                    if(doorAng<135){
+                        doorAng+=1.5;
+                    }
+                }
                 glScaled(1.0f, 0.5, 0.1f);
                 cubs[DOOR] -> draw();
             }
@@ -305,11 +420,18 @@ void WallE::draw(){
             
             glPushMatrix();
             {
-                //glRotated(0, 0, 1, 0);
+                if(cabezaLoca){
+                    glRotated(cabezAngle, 0, 1, 0);
+                    if(cabezaFlag<5){
+                        glRotated(25, 1, 0, 0);
+                    }else{
+                        glTranslatef(0.0, hide-0.7, 0.0);
+                    }
+                }
                 glPushMatrix(); //NECK1
                 {
                     glRotated(45, 0, 1, 0);
-                    glTranslated(0.0, 0.70, 0.0);
+                    glTranslated(0.0, 0.7, 0.0);
                     setMaterial(mat_brown_diff, mat_brown_diff, mat_brown_ambi, mat_brown_shin);
                     glRotated(0, 0, 0, 1);
                     glScalef(0.2, 0.25, 0.2);

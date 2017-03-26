@@ -55,4 +55,18 @@ public:
     float *mat_eyes_ambi;
     float *mat_eyes_shin;
     
+    float lx,ly,lz;
+    
+    float cabezAngle;
+    float bodyAngle;
+    float hide;
+    int cabezaFlag;
+    float brazoAngle,brazoAngle2,doorAng;
+    
+    float pos,pos2;
+    
+    int frames;
+    
+    bool appear,cabezaLoca;
+    
 };

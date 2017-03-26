@@ -24,6 +24,7 @@ GLfloat*	mat0_diffuse; //<----------------------------------------Material 0 - d
 GLfloat*	mat0_shininess; //<--------------------------------------Material 0 - specular power
 GLfloat*	light0_position; //<-------------------------------------Light 0    - location
 
+
 void display( void )
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);				// Clear color and depth buffers.
@@ -44,6 +45,7 @@ void display( void )
     luxo -> draw();
     if(luxo->flip){
         walle->draw();
+        walle->appear = true;
     }
     
     
@@ -53,6 +55,7 @@ void display( void )
 void idle( void )
 {
     luxo -> update();
+    walle -> update();
     glutPostRedisplay();
 }
 
@@ -117,59 +120,24 @@ void reshape( int x, int y )
     gluPerspective(40.0, (GLdouble)x / (GLdouble)y, 0.5, 20.0);		// Configure the camera lens aperture.
     glMatrixMode(GL_MODELVIEW);										// Go to 3D mode.
     glViewport(0, 0, x, y);											// Configure the camera frame dimensions.
-    gluLookAt(2.0, 1.0, 3.0,
+    gluLookAt(0.0, 0.0, 3.0,
               0.0, 0.0, 0.0,
-              0.0, 1.0, 0.0);
+              0.0, 0.0, 0.0);
     display();
 }
 
-void keys( unsigned char key, int x, int y )
-{
-    switch( key )
-    {
-        case 'r':case 'R':
-            glClearColor( 1.0, 0.0, 0.0, 1.0 );
-            break;
-        case 'b':case 'B':
-            glClearColor( 0.0, 0.3, 0.7, 1.0 );
-            break;
-        case '0':
-            glClearColor( 0.0, 0.0, 0.0, 1.0 );
-            break;
-        case 27:
-            delete walle;
-            exit(0);
-        default:
-            break;
-    }
-}
 
-void mouse( int button, int state, int x, int y )
-{
-    
-}
-
-void move( int x, int y )
-{
-    static int lastX = 0, lastY = 0;
-    deltaX += lastX - x;
-    deltaY -= lastY - y;
-    lastX = x;
-    lastY = y;
-}
 
 int main( int argc, char** argv )
 {
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
-    glutInitWindowSize( 512, 512 );
-    glutInitWindowPosition( 600, 100 );
-    glutCreateWindow( "Cube with Vertex Arrays" );
+    glutInitWindowSize( 1000, 1000 );
+    glutInitWindowPosition( 300, 50 );
+    glutCreateWindow( "Wall-E" );
     
     glutReshapeFunc( reshape );
-    glutKeyboardFunc( keys );
-    glutMotionFunc( move );
-    glutMouseFunc( mouse );
+
     
     init();
     glutDisplayFunc( display ); 
